@@ -1,0 +1,15 @@
+{% extends "master.html" %}
+
+{% block title %}
+    Response details for {{ myresponse.firstname }} {{ myresponse.lastname }}
+{% endblock %}
+
+{% block content %}
+
+    <h1>{{ myresponse.firstname }} {{ myresponse.lastname }}</h1>
+    <p>Phone: {{ myresponse.phone }}</p>
+    <p>Response recieved on {{ myresponse.joined_date }}</p>
+
+    <p>Back to <a href="/responses">Responses</a></p>
+
+{% endblock %}

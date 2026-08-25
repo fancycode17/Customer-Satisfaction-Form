@@ -1,0 +1,19 @@
+{% extends "master.html" %}
+
+{% block title %}
+    Customer Satisfaction Form - All responses
+{% endblock %}
+
+{% block content %}
+    <p><a href="/">HOME</a></p>
+
+    <h1>Responses</h1>
+
+    <ul>
+        {% for x in myresponses %}
+            <li><a href="details/{{ x.id }}">{{ x.firstname }} {{x.lastname}}</a></li>
+        {% empty %}
+            <li>No responses</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
