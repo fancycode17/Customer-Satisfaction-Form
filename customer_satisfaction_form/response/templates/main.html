@@ -10,6 +10,7 @@
     <h3>Your support ticket has been resolved. Please take a moment to share your feedback. 
         <br>This survey takes less than 1 minute.</h3>
     <hr>
+
     <form method="post">
         {% for x in questions %}
             {% if x.is_required %}
@@ -18,8 +19,18 @@
             {% else %}
                 <h3>{{ x.text }}</h3>
             {% endif %}
+
             <h6>{{ x.help_text }}</h6>
-            {% email_input %}
+
+            {% if x.type == 'email' %}
+                {% email_input name=x.id %}
+            {% elif x.type == 'short_text' %}
+                {% short_text name=x.id %}
+            {% elif x.type == 'long_text' %}
+                {% long_text name=x.id %}
+            {% elif x.type == 'rating_1-5' %}
+                {% rating_1_5 name=x.id %}
+            {% endif %}
         {% empty %}
             <h3>No questions</h3>
         {% endfor %}
