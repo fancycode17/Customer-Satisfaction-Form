@@ -1,16 +1,28 @@
 {% extends "master.html" %}
+{% load custom_tags %}
 
 {% block title %}
     Customer Satisfaction Form
 {% endblock %}
 
 {% block content %}
-    <h1>Customer Satisfaction Form</h1>
-
-    {% for x in questions %}
-        <h3>{{ x.text }}</h3>
-    {% empty %}
-        <h3>No questions</h3>
-    {% endfor %}
-
+    <h1>Customer Support & App Feedback Survey</h1>
+    <h3>Your support ticket has been resolved. Please take a moment to share your feedback. 
+        <br>This survey takes less than 1 minute.</h3>
+    <hr>
+    <form method="post">
+        {% for x in questions %}
+            {% if x.is_required %}
+                <h3>{{ x.text }} 
+                    <span class="required">*</span></h3>
+            {% else %}
+                <h3>{{ x.text }}</h3>
+            {% endif %}
+            <h6>{{ x.help_text }}</h6>
+            {% email_input %}
+        {% empty %}
+            <h3>No questions</h3>
+        {% endfor %}
+    </form>
+    
 {% endblock %}

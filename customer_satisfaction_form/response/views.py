@@ -19,7 +19,7 @@ def details(request, id):
     return HttpResponse(template.render(context, request))
 
 def main(request):
-    questions = Question.objects.all().order_by('-display_order').values()
+    questions = Question.objects.filter(is_active=True).order_by('display_order').values()
     template = loader.get_template('main.html')
     context = {
             'questions': questions,

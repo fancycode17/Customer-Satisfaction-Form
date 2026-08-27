@@ -39,7 +39,7 @@ class Option(models.Model):
         # Only auto-assign if display_order wasn't set manually
         if self.display_order is None: #if display_order hasn't been manually set:
             #find the maximum value of display_order in the table
-            last_order = Question.objects.aggregate(models.Max("display_order"))["display_order__max"]
+            last_order = Option.objects.aggregate(models.Max("display_order"))["display_order__max"]
             self.display_order = (last_order or 0) + 1 #add one to the current max display_order (or 0 if it is the first row)
         super().save(*args, **kwargs) #call the default save() function to apply changes
 
