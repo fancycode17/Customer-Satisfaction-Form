@@ -15,7 +15,8 @@ class Question(models.Model): #uses Django ORM to create a database table. each 
     help_text = models.CharField(blank=True)
     type = models.CharField(max_length=15)
     version = models.SmallIntegerField()
-    active = models.BooleanField(db_default=True)
+    is_active = models.BooleanField(db_default=True)
+    is_required = models.BooleanField()
     display_order = models.SmallIntegerField(blank=True)
 
     def save(self, *args, **kwargs): #overrides default save() function
@@ -32,7 +33,7 @@ class Option(models.Model):
         )
     label = models.CharField(max_length=100)
     display_order = models.SmallIntegerField(blank=True)
-    active = models.BooleanField(db_default=True)
+    is_active = models.BooleanField(db_default=True)
 
     def save(self, *args, **kwargs): #overrides default save() function
         # Only auto-assign if display_order wasn't set manually
