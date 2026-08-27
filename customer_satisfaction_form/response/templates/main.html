@@ -7,6 +7,10 @@
 {% block content %}
     <h1>Customer Satisfaction Form</h1>
 
-    <h3>Responses</h3>
-    <p>View all <a href="responses/">responses</a></p>
+    {% for x in questions %}
+        <h3>{{ x.text }}</h3>
+    {% empty %}
+        <h3>No questions</h3>
+    {% endfor %}
+
 {% endblock %}

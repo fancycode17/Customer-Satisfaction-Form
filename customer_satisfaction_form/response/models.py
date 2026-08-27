@@ -12,18 +12,35 @@ class Response(models.Model):
 
 class Question(models.Model): #uses Django ORM to create a database table. each variable is a column
     text = models.CharField(max_length=255)
-    help_text = models.CharField()
+    help_text = models.CharField(blank=True)
     type = models.CharField(max_length=15)
     version = models.SmallIntegerField()
-    active = models.BooleanField()
-    display_order = models.SmallIntegerField()
+    active = models.BooleanField(db_default=True)
+    display_order = models.SmallIntegerField(blank=True)
+
+    def save(self, *args, **kwargs): #overrides default save() function
+        # Only auto-assign if display_order wasn't set manually
+        if self.display_order is None: #if display_order hasn't been manually set:
+            #find the maximum value of display_order in the table
+            last_order = Question.objects.aggregate(models.Max("display_order"))["display_order__max"]
+            self.display_order = (last_order or 0) + 1 #add one to the current max display_order (or 0 if it is the first row)
+        super().save(*args, **kwargs) #call the default save() function to apply changes
 
 class Option(models.Model):
     question = models.ForeignKey( #links Option to Question so calls such as Option.question.id can be made
         Question, on_delete=models.PROTECT, related_name='options'
         )
     label = models.CharField(max_length=100)
-    display_order = models.SmallIntegerField()
+    display_order = models.SmallIntegerField(blank=True)
+    active = models.BooleanField(db_default=True)
+
+    def save(self, *args, **kwargs): #overrides default save() function
+        # Only auto-assign if display_order wasn't set manually
+        if self.display_order is None: #if display_order hasn't been manually set:
+            #find the maximum value of display_order in the table
+            last_order = Question.objects.aggregate(models.Max("display_order"))["display_order__max"]
+            self.display_order = (last_order or 0) + 1 #add one to the current max display_order (or 0 if it is the first row)
+        super().save(*args, **kwargs) #call the default save() function to apply changes
 
 class Submission(models.Model):
     submitted_at = models.DateTimeField()

@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.template import loader
-from .models import Response
+from .models import Response, Question
 
 def responses(request):
     myresponses = Response.objects.all().order_by('-joined_date').values()
@@ -19,8 +19,12 @@ def details(request, id):
     return HttpResponse(template.render(context, request))
 
 def main(request):
+    questions = Question.objects.all().order_by('-display_order').values()
     template = loader.get_template('main.html')
-    return HttpResponse(template.render())
+    context = {
+            'questions': questions,
+        }
+    return HttpResponse(template.render(context, request))
 
 def testing(request):
     myresponses = Response.objects.all().order_by('-joined_date').values()
