@@ -20,16 +20,18 @@
                 <h3>{{ x.text }}</h3>
             {% endif %}
 
-            <h6>{{ x.help_text }}</h6>
-
             {% if x.type == 'email' %}
-                {% email_input name=x.id %}
+                {% email_input q=x %}
             {% elif x.type == 'short_text' %}
-                {% short_text name=x.id %}
+                {% short_text q=x %}
             {% elif x.type == 'long_text' %}
-                {% long_text name=x.id %}
+                {% long_text q=x %}
             {% elif x.type == 'rating_1-5' %}
-                {% rating_1_5 name=x.id %}
+                {% rating_1_5 q=x %}
+            {% elif x.type == 'rating_1-10' %}
+                {% rating_1_10 q=x %}
+            {% elif x.type == 'multi-select' %}
+                {% multi_select q=x %}
             {% endif %}
         {% empty %}
             <h3>No questions</h3>
