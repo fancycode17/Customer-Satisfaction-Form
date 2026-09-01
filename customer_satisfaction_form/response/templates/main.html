@@ -12,30 +12,33 @@
     <hr>
 
     <form method="post">
-        {% for x in questions %}
-            {% if x.is_required %}
-                <h3>{{ x.text }} 
-                    <span class="required">*</span></h3>
-            {% else %}
-                <h3>{{ x.text }}</h3>
+        {% csrf_token %} <!--Prevents Cross Site Request Forgery-->
+        {% for q in questions %}
+            <h3>{{ q.text }}{% if q.is_required %}<span class="required">*</span>{% endif %}</h3>
+
+            {% if errors|get_item:"question_"|add:q.id %}
+                {% for err in errors|get_item:"question_"|add:q.id %}
+                    <p style="color:red;">{{ err }}</p>
+                {% endfor %}
             {% endif %}
 
-            {% if x.type == 'email' %}
-                {% email_input q=x %}
-            {% elif x.type == 'short_text' %}
-                {% short_text q=x %}
-            {% elif x.type == 'long_text' %}
-                {% long_text q=x %}
-            {% elif x.type == 'rating_1-5' %}
-                {% rating_1_5 q=x %}
-            {% elif x.type == 'rating_1-10' %}
-                {% rating_1_10 q=x %}
-            {% elif x.type == 'multi-select' %}
-                {% multi_select q=x %}
+            {% if q.type == 'email' %}
+                {% email_input q=q %}
+            {% elif q.type == 'short_text' %}
+                {% short_text q submitted_data %}
+            {% elif q.type == 'long_text' %}
+                {% long_text q=q %}
+            {% elif q.type == 'rating_1-5' %}
+                {% rating_1_5 q=q %}
+            {% elif q.type == 'rating_1-10' %}
+                {% rating_1_10 q=q %}
+            {% elif q.type == 'multi-select' %}
+                {% multi_select q=q %}
             {% endif %}
         {% empty %}
             <h3>No questions</h3>
         {% endfor %}
+        <button type="submit">Submit</button>
     </form>
     
 {% endblock %}
