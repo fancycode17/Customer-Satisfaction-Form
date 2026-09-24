@@ -1,0 +1,13 @@
+{% if q.help_text %}
+    <label for="question_{{ q.id }}">{{ q.help_text }}</label><br>
+{% endif %}
+
+<textarea 
+    id="question_{{ q.id }}" 
+    name="question_{{ q.id }}"
+    value="{{ value }}"
+    placeholder="{{ placeholder }}" 
+    rows="{{ rows }}" 
+    cols="{{ cols }}"
+    {% if q.is_required %}required{% endif %}>
+</textarea>

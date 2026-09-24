@@ -23,17 +23,17 @@
             {% endif %}
 
             {% if q.type == 'email' %}
-                {% email_input q=q %}
+                {% email_input q submitted_data %}
             {% elif q.type == 'short_text' %}
                 {% short_text q submitted_data %}
             {% elif q.type == 'long_text' %}
-                {% long_text q=q %}
+                {% long_text q submitted_data %}
             {% elif q.type == 'rating_1-5' %}
-                {% rating_1_5 q=q %}
+                {% rating_1_5 q submitted_data %}
             {% elif q.type == 'rating_1-10' %}
-                {% rating_1_10 q=q %}
+                {% rating_1_10 q submitted_data %}
             {% elif q.type == 'multi-select' %}
-                {% multi_select q=q %}
+                {% multi_select q submitted_data %}
             {% endif %}
         {% empty %}
             <h3>No questions</h3>

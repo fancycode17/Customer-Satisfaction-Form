@@ -1,0 +1,12 @@
+{% if q.help_text %}
+    <label for="question_{{ q.id }}">{{ q.help_text }}</label><br>
+{% endif %}
+
+<input type="number" 
+    id="question_{{ q.id }}" 
+    name="question_{{ q.id }}" 
+    min="1" 
+    max="10" 
+    value="{{ value }}" 
+    step="1"
+    {% if q.is_required %}required{% endif %}>

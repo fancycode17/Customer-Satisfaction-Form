@@ -1,0 +1,10 @@
+{% if q.help_text %}
+    <label for="question_{{ q.id }}">{{ q.help_text }}</label><br>
+{% endif %}
+
+<input type="email" 
+    id="question_{{ q.id }}" 
+    name="question_{{ q.id }}" 
+    value="{{ value }}" 
+    placeholder="{{ placeholder }}"
+    {% if q.is_required %}required{% endif %}>

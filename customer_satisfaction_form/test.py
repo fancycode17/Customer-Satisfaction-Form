@@ -80,7 +80,13 @@ def check_errors(post_data):
 
     return errors
 
-
+def no_errors(errors):
+    no_errors = True
+    for item in errors.values():
+        if item:
+            no_errors = False
+    
+    return no_errors
 from django.http import QueryDict
 
 post_data = QueryDict('', mutable=True)
@@ -92,7 +98,8 @@ post_data.setlist('question_6', ['jibran'])
 post_data.setlist('question_7', ['jibran@example.com'])
 
 # For multi-select:
-post_data.setlist('question_4', ['Psh notifications', 'Video calling/Virtual inspection', 'Other'])
+post_data.setlist('question_4', ['Push notifications', 'Video calling/Virtual inspection'])
 
-print(check_errors(post_data))
-
+errors = check_errors(post_data)
+print(errors)
+print(no_errors(errors))

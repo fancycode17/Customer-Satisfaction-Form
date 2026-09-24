@@ -42,7 +42,8 @@ def check_errors(post_data):
             selections = post_data.getlist(key)
             other_detail = post_data.get(f'other_detail_{q.id}','')
             if other_detail:
-                selections.append(f'Other: {other_detail}')
+                submitted_data[f'other_detail_{q.id}'] = other_detail
+                #selections.append(f'Other: {other_detail}')
             submitted_data[key] = selections
         
             if q.is_required and not selections:
@@ -64,10 +65,13 @@ def check_errors(post_data):
                 continue
 
             if q.type == 'rating_1-5':
-                if not value.isdigit():
-                    errors[key].append('Answer must be an integer')
-                elif not (1 <= int(value) <= 5):
-                    errors[key].append('Answer must be between 1 and 5')
+                if value == '':
+                    continue
+                else:
+                    if not value.isdigit():
+                        errors[key].append('Answer must be an integer')
+                    elif not (1 <= int(value) <= 5):
+                        errors[key].append('Answer must be between 1 and 5')
             elif q.type == 'rating_1-10':
                 if not value.isdigit():
                     errors[key].append('Answer must be an integer')
@@ -91,3 +95,11 @@ def get_email(keys):
             q = questions.filter(id=id)[0]
             if q.type == 'email':
                 return key
+
+def no_errors(errors):
+    no_errors = True
+    for item in errors.values():
+        if item:
+            no_errors = False
+    
+    return no_errors

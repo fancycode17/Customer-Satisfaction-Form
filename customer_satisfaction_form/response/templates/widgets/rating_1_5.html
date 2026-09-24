@@ -1,0 +1,18 @@
+{% if q.help_text %}
+    <label for="question_{{ q.id }}">{{ q.help_text }}</label><br>
+{% endif %}
+
+<input type="radio" id="r5" name="question_{{ q.id }}" value="5"{% if q.is_required %} required{% endif %}{% if checked == '5' %} checked{% endif %}>
+<label for="r5">★★★★★</label><br>
+
+<input type="radio" id="r4" name="question_{{ q.id }}" value="4"{% if q.is_required %} required{% endif %}{% if checked == '4' %} checked{% endif %}>
+<label for="r4">★★★★☆</label><br>
+
+<input type="radio" id="r3" name="question_{{ q.id }}" value="3"{% if q.is_required %} required{% endif %}{% if checked == '3' %} checked{% endif %}>
+<label for="r3">★★★☆☆</label><br>
+
+<input type="radio" id="r2" name="question_{{ q.id }}" value="2"{% if q.is_required %} required{% endif %}{% if checked == '2' %} checked{% endif %}>
+<label for="r2">★★☆☆☆</label><br>
+
+<input type="radio" id="r1" name="question_{{ q.id }}" value="1"{% if q.is_required %} required{% endif %}{% if checked == '1' %} checked{% endif %}>
+<label for="r1">★☆☆☆☆</label>

@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.template import loader
 from django.shortcuts import redirect
 from .models import Response, Question, Submission, Answer
-from .helper import get_client, get_email, check_errors
+from .helper import get_client, get_email, check_errors, no_errors
 from datetime import datetime
 
 def responses(request):
@@ -33,7 +33,7 @@ def main(request):
         errors, submitted_data = check_errors(post_data)
                     
         print(post_data)
-        if not errors:
+        if no_errors(errors):
             submission = Submission.objects.create(
                 submitted_at=datetime.now(),
                 name=post_data.get("name",""),
@@ -52,6 +52,8 @@ def main(request):
                     )
 
             return redirect('success')
+        else:
+            print(errors)
 
     context = {
                 'questions': questions,
