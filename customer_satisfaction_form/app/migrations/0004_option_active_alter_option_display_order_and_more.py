@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("response", "0003_question_submission_option_answer"),
+        ("app", "0003_question_submission_option_answer"),
     ]
 
     operations = [

@@ -2,13 +2,6 @@ from .models import Question
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 
-def valid_email(email):
-    try:
-        validate_email(email)
-        return True
-    except ValidationError:
-        return False
-
 def invalid_multi_select(q, post_data, errors):
     #returns flat list of the labels of options tied to the question
     valid_selections = list(q.options.values_list('label', flat=True))
@@ -82,9 +75,21 @@ def check_errors(post_data):
 
     return errors, submitted_data
 
+def get_name(keys):
+    questions = Question.objects.filter(is_active=True)
+    for key in keys:
+        if key.startswith('question_'):
+            id = key.split('_')[1]
+            q = questions.filter(id=id)[0]
+            if q.type == 'name':
+                return key
+
 def get_client(email):
-    domain = email.split('@')[1]
-    client = domain.split('.')[0]
+    if valid_email(email):
+        domain = email.split('@')[1]
+        client = domain.split('.')[0].capitalize()
+    else:
+        client = 'N/A'
     return client
 
 def get_email(keys):
@@ -95,6 +100,13 @@ def get_email(keys):
             q = questions.filter(id=id)[0]
             if q.type == 'email':
                 return key
+            
+def valid_email(email):
+    try:
+        validate_email(email)
+        return True
+    except ValidationError:
+        return False
 
 def no_errors(errors):
     no_errors = True

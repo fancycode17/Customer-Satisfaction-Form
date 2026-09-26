@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.template import loader
 from django.shortcuts import redirect
 from .models import Response, Question, Submission, Answer
-from .helper import get_client, get_email, check_errors, no_errors
+from .helper import get_client, get_email, get_name, check_errors, no_errors
 from datetime import datetime
 
 def responses(request):
@@ -31,25 +31,40 @@ def main(request):
         post_data = request.POST.copy()
         post_data.pop('csrfmiddlewaretoken', None)
         errors, submitted_data = check_errors(post_data)
-                    
+        email = post_data.get(get_email(post_data.keys()),"N/A")
         print(post_data)
         if no_errors(errors):
             submission = Submission.objects.create(
                 submitted_at=datetime.now(),
-                name=post_data.get("name",""),
-                email=post_data.get(get_email(post_data.keys()),""),
-                client='Example'
+                name=post_data.get(get_name(post_data.keys()),"N/A"),
+                email= email,
+                client= get_client(email)
             )
 
             for q in questions:
                 values = request.POST.getlist(f'question_{q.id}')
                 if values:
-                    Answer.objects.create(
-                        submission=submission,
-                        question=q,
-                        value=', '.join(values),
-                        display_order=q.display_order
-                    )
+                    if q.type == 'multi-select':
+                        other_detail = request.POST.getlist(f'other_detail_{q.id}')[0]
+                        selected = []
+                        for value in values:
+                            if value == 'Other':
+                                value += f': {other_detail}'
+                            selected.append(value)
+
+                        Answer.objects.create(
+                            submission=submission,
+                            question=q,
+                            value=', '.join(selected),
+                            display_order=q.display_order
+                        )
+                    else:
+                        Answer.objects.create(
+                            submission=submission,
+                            question=q,
+                            value=', '.join(values),
+                            display_order=q.display_order
+                        )
 
             return redirect('success')
         else:

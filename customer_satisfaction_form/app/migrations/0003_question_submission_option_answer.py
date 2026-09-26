@@ -7,7 +7,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("response", "0002_form_joined_date_form_phone"),
+        ("app", "0002_form_joined_date_form_phone"),
     ]
 
     operations = [
@@ -68,7 +68,7 @@ class Migration(migrations.Migration):
                     models.ForeignKey(
                         on_delete=django.db.models.deletion.PROTECT,
                         related_name="options",
-                        to="response.question",
+                        to="app.question",
                     ),
                 ),
             ],
@@ -92,7 +92,7 @@ class Migration(migrations.Migration):
                     models.ForeignKey(
                         on_delete=django.db.models.deletion.PROTECT,
                         related_name="answers",
-                        to="response.question",
+                        to="app.question",
                     ),
                 ),
                 (
@@ -100,7 +100,7 @@ class Migration(migrations.Migration):
                     models.ForeignKey(
                         on_delete=django.db.models.deletion.PROTECT,
                         related_name="answers",
-                        to="response.submission",
+                        to="app.submission",
                     ),
                 ),
             ],

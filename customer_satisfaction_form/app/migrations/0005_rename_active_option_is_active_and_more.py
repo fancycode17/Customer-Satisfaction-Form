@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("response", "0004_option_active_alter_option_display_order_and_more"),
+        ("app", "0004_option_active_alter_option_display_order_and_more"),
     ]
 
     operations = [

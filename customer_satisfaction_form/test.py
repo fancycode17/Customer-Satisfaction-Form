@@ -8,7 +8,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "customer_satisfaction_form.sett
 django.setup()
 
 # 3. Now you can safely import your apps and models
-from response.models import Question
+from app.models import Question
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 

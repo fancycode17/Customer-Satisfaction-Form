@@ -26,6 +26,8 @@
                 {% email_input q submitted_data %}
             {% elif q.type == 'short_text' %}
                 {% short_text q submitted_data %}
+            {% elif q.type == 'name' %}
+                {% short_text q submitted_data %}
             {% elif q.type == 'long_text' %}
                 {% long_text q submitted_data %}
             {% elif q.type == 'rating_1-5' %}
