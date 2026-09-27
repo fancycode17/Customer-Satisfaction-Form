@@ -31,7 +31,7 @@ def check_errors(post_data):
         key = f'question_{q.id}'
         errors[key] = []
         #get value of response for the question ('' if not included in POST request)
-        if q.type =='multi-select':
+        if q.type =='MSELECT':
             selections = post_data.getlist(key)
             other_detail = post_data.get(f'other_detail_{q.id}','')
             if other_detail:
@@ -57,7 +57,7 @@ def check_errors(post_data):
                 errors[key].append('Answer required.')
                 continue
 
-            if q.type == 'rating_1-5':
+            if q.type == 'R1-5':
                 if value == '':
                     continue
                 else:
@@ -65,12 +65,12 @@ def check_errors(post_data):
                         errors[key].append('Answer must be an integer')
                     elif not (1 <= int(value) <= 5):
                         errors[key].append('Answer must be between 1 and 5')
-            elif q.type == 'rating_1-10':
+            elif q.type == 'R1-10':
                 if not value.isdigit():
                     errors[key].append('Answer must be an integer')
                 elif not 1 <= int(value) <= 10:
                     errors[key].append('Answer must be between 1 and 10')
-            elif q.type == 'email' and not valid_email(value):
+            elif q.type == 'EMAIL' and not valid_email(value):
                 errors[key].append('Invalid email format')            
 
     return errors, submitted_data
@@ -81,7 +81,7 @@ def get_name(keys):
         if key.startswith('question_'):
             id = key.split('_')[1]
             q = questions.filter(id=id)[0]
-            if q.type == 'name':
+            if q.type == 'NAME':
                 return key
 
 def get_client(email):
@@ -98,7 +98,7 @@ def get_email(keys):
         if key.startswith('question_'):
             id = key.split('_')[1]
             q = questions.filter(id=id)[0]
-            if q.type == 'email':
+            if q.type == 'EMAIL':
                 return key
             
 def valid_email(email):

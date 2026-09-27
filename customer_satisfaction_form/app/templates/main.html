@@ -22,19 +22,19 @@
                 {% endfor %}
             {% endif %}
 
-            {% if q.type == 'email' %}
+            {% if q.type == 'EMAIL' %}
                 {% email_input q submitted_data %}
-            {% elif q.type == 'short_text' %}
+            {% elif q.type == 'TEXT' %}
                 {% short_text q submitted_data %}
-            {% elif q.type == 'name' %}
+            {% elif q.type == 'NAME' %}
                 {% short_text q submitted_data %}
-            {% elif q.type == 'long_text' %}
+            {% elif q.type == 'LTEXT' %}
                 {% long_text q submitted_data %}
-            {% elif q.type == 'rating_1-5' %}
+            {% elif q.type == 'R1-5' %}
                 {% rating_1_5 q submitted_data %}
-            {% elif q.type == 'rating_1-10' %}
+            {% elif q.type == 'R1-10' %}
                 {% rating_1_10 q submitted_data %}
-            {% elif q.type == 'multi-select' %}
+            {% elif q.type == 'MSELECT' %}
                 {% multi_select q submitted_data %}
             {% endif %}
         {% empty %}

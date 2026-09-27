@@ -44,7 +44,7 @@ def main(request):
             for q in questions:
                 values = request.POST.getlist(f'question_{q.id}')
                 if values:
-                    if q.type == 'multi-select':
+                    if q.type == 'MSELECT':
                         other_detail = request.POST.getlist(f'other_detail_{q.id}')[0]
                         selected = []
                         for value in values:

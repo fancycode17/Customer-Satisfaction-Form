@@ -13,7 +13,18 @@ class Response(models.Model):
 class Question(models.Model): #uses Django ORM to create a database table. each variable is a column
     text = models.CharField(max_length=255)
     help_text = models.CharField(blank=True)
-    type = models.CharField(max_length=15)
+
+    TYPE_CHOICES = [
+        ('EMAIL', 'Email'),
+        ('NAME', 'Name'),
+        ('TEXT', 'Short Text'),
+        ('LTEXT', 'Long Text'),
+        ('R1-5', '1-5 Rating'),
+        ('R1-10', '1-10 Rating'),
+        ('MSELECT', 'Multi-select'),
+    ]
+
+    type = models.CharField(max_length=15, choices=TYPE_CHOICES)
     version = models.SmallIntegerField()
     is_active = models.BooleanField(db_default=True)
     is_required = models.BooleanField()
