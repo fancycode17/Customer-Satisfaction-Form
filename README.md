@@ -47,4 +47,9 @@ If an empty dictionary of errors is returned (i.e. no errors):
   * Set the `submitted_at` field to the current time: `submitted_at=datetime.now(),`
   * Filter the post data for a key which contains the question id of a question of type "NAME", and set the `name` field of the submission to the key's corresponding value (or "N/A" if there was no answer to a question of type "NAME"): `name=post_data.get(get_name(post_data.keys()),"N/A"),`
   * Do the same for the answer to a question of type "EMAIL": `email = post_data.get(get_email(post_data.keys()),"N/A")`
-  * Derive the client name from the email
+  * Derive the client name from the email:<pre>domain = email.split('@')[1]<br>client = domain.split('.')[0].upper()</pre>
+* Create an Answer for each response to a question:
+  * Loop through each active question and get a list of values from the post data that match its id: `values = request.POST.getlist(f'question_{q.id}')`
+  * If the question's type is "MSELECT":
+    * Get `other_detail` from the post data (for if the "Other" option was selected): `other_detail = request.POST.getlist(f'other_detail_{q.id}')[0]`
+    * Store the value as a string of selected options seperated by ",". If the "Other" option was selected use a ":" to join "Other" with `other_detail` (e.g. `Push notifications, Other: audio quality`).
