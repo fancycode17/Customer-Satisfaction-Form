@@ -87,7 +87,7 @@ def get_name(keys):
 def get_client(email):
     if valid_email(email):
         domain = email.split('@')[1]
-        client = domain.split('.')[0].capitalize()
+        client = domain.split('.')[0].upper()
     else:
         client = 'N/A'
     return client
