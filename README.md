@@ -33,3 +33,18 @@ After the form is successfully submitted, the customer is redirected to a Thank 
 ---
 
 ## Processing Form Data
+
+Once a POST request has been made by the customer form, the post data is sent to a function called check_errors(), which does the following:
+
+* Get all the active Question records: ```Question.objects.filter(is_active=True)```
+* Loop through each question attempts to find the corresponding answer in the post data: <pre>key = f'question_{q.id}'<br>value = post_data.get(key, '')</pre>Or, for multiple choice questions:<pre>selections = post_data.getlist(key)<br>other_detail = post_data.get(f'other_detail_{q.id}','')</pre>
+* Validate submission data based on question type
+* Return `submitted_data` and a dictionary of errors
+
+If an empty dictionary of errors is returned (i.e. no errors):
+
+* Create a Submission (`submission = Submission.objects.create(...`:
+  * Set the `submitted_at` field to the current time: `submitted_at=datetime.now(),`
+  * Filter the post data for a key which contains the question id of a question of type "NAME", and set the `name` field of the submission to the key's corresponding value (or "N/A" if there was no answer to a question of type "NAME"): `name=post_data.get(get_name(post_data.keys()),"N/A"),`
+  * Do the same for the answer to a question of type "EMAIL": `email = post_data.get(get_email(post_data.keys()),"N/A")`
+  * Derive the client name from the email
