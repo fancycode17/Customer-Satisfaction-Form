@@ -1,0 +1,8 @@
+[project]
+name = "Customer-Satisfaction-Form"
+version = "0.1.0"
+description = "A Django customer feedback form app"
+requires-python = ">=3.12"
+
+[tool.django]
+settings-module = "customer_satisfaction_form.settings"
