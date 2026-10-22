@@ -57,5 +57,5 @@ Output of `ipconfig` (the line that starts with `IPv4 Address...`) is `IPv4 Addr
 ## Aditional Documentation
 
 * Make sure the system [prerequisites](prerequisites.md) are installed.
-* Any issues? Visit the [troubleshooting](troubleshooting) page or [create an issue](https://github.com/fancycode17/Customer-Satisfaction-Form/issues)
+* Any issues? Visit the [troubleshooting](troubleshooting.md) page or [create an issue](https://github.com/fancycode17/Customer-Satisfaction-Form/issues)
 * Learn [how the application works](architecture.md)
