@@ -34,4 +34,4 @@ Follow the installation instructions to create a virtual environment and install
 
 ## Next steps
 
-Now that the prerequisites are set up, you can move on to [installing the application](docs/installation.md)
+Now that the prerequisites are set up, you can move on to [installing the application](installation.md)
