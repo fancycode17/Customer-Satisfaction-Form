@@ -16,7 +16,6 @@ def main(request):
         post_data.pop('csrfmiddlewaretoken', None)
         errors, submitted_data = check_errors(post_data)
         email = post_data.get(get_email(post_data.keys()),"N/A")
-        print(post_data)
         if no_errors(errors):
             submission = Submission.objects.create(
                 submitted_at=datetime.now(),
