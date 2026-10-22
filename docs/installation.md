@@ -1,5 +1,5 @@
 # customer-satisfaction-form
-(**Note**: this guide assumes you have already installed the required software needed to setup and install the application. If you haven't done so already, please see the [prerequisites]('/docs/prerequisites.md'))
+(**Note**: this guide assumes you have already installed the required software needed to setup and install the application. If you haven't done so already, please see the [prerequisites](/docs/prerequisites.md))
 
 ## Setup
 
@@ -56,6 +56,6 @@ Output of `ipconfig` (the line that starts with `IPv4 Address...`) is `IPv4 Addr
 
 ## Aditional Documentation
 
-* Make sure the system [prerequisites]('docs/prerequisites.md') are installed.
-* Any issues? Visit the [troubleshooting]('docs/troubleshooting') page or [create an issue]('https://github.com/fancycode17/Customer-Satisfaction-Form/issues')
-* Learn [how the application works]('docs/architecture.md')
+* Make sure the system [prerequisites](docs/prerequisites.md) are installed.
+* Any issues? Visit the [troubleshooting](docs/troubleshooting) page or [create an issue](https://github.com/fancycode17/Customer-Satisfaction-Form/issues)
+* Learn [how the application works](docs/architecture.md)

@@ -31,3 +31,7 @@ These provide Python language support, as well as code completion and analysis.
 The Python packages required by the application can be found in `requirements.txt`.
 
 Follow the installation instructions to create a virtual environment and install the dependencies.
+
+## Next steps
+
+Now that the prerequisites are set up, you can move on to [installing the application](docs/installation.md)
