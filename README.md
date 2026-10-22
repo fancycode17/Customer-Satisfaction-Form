@@ -1,8 +1,15 @@
 # customer-satisfaction-form
 ## Setup
 
+**If using zip file:**
 1. Download zip
 2. Extract zip, open in editor
+
+**If using git clone:**
+1. Run: `git clone https://github.com/fancycode17/Customer-Satisfaction-Form.git`
+2. Run: `cd Customer-Satisfaction-Form`
+
+**Then:**
 3. Create a virtual environment: `python -m venv .venv`
 4. Activate the virtual environment:
   * If using Windows Command Prompt (cmd): `.venv\Scripts\activate.bat`
