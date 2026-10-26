@@ -9,7 +9,7 @@ To check the installed version run:
 `python --version`
 This should output Python 3.12 or a newer version.
 
-**Git**
+**Git** <br><br>
 Git is required if you intend to clone the repository or manage changes using Git.
 
 To check whether Git is installed run:
@@ -17,7 +17,7 @@ To check whether Git is installed run:
 
 ## Optional - Development tools
 
-**Visual Studio Code**
+**Visual Studio Code**<br><br>
 Visual Studio Code is recommended for development but isn't required to run the application.
 
 If using Visual Studio Code, the recommended extensions are:
